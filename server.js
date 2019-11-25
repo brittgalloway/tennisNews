@@ -4,7 +4,7 @@ var mongoose = require("mongoose");
 var exphbs = require("express-handlebars");
 
 // Our scraping tools
-// Axios 
+// Axios
 var axios = require("axios");
 var cheerio = require("cheerio");
 
@@ -30,9 +30,11 @@ app.use(express.static("public"));
 app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
-require("./routes/htmlRoutes")(app)
+require("./routes/htmlRoutes")(app);
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true });
+mongoose.connect("mongodb://localhost/unit18Populater", {
+  useNewUrlParser: true,
+});
 
 // // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
 // var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
@@ -46,27 +48,42 @@ app.get("/scrape", (req, res) => {
   axios.get("https://www.atptour.com/en/news").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
+    const listing = $(".listing-item");
+    // console.log(listing.html());
 
-    // Now, we grab every h2 within an article tag, and do the following:
-    $("h3.listing-title").each((i, element) => {
+    $(".listing-item").each(function(i, element) {
       // Save an empty result object
       var result = {};
 
-      // Add the text and href of every link, and save them as properties of the result object
-      result.title = $(this)
-        .children("a")
-        .text();
-      result.link = $(this)
+      result.headline = $(this)
+        .find("div")
+        .find("h3")
+        .text()
+        .trim();
+      // console.log(1, result.headline);
+      result.thumbNail = $(this)
+        .find("a")
+        .find("img")
+        .attr("src");
+      // console.log(2, result.thumbNail);
+      result.category = $(this)
+        .find("div")
+        .find(".listing-category-title")
+        .text()
+        .trim();
+      // console.log(3, result.category);
+      result.url = $(this)
         .children("a")
         .attr("href");
+      // console.log(4, result.url);
 
-      // Create a new Article using the `result` object built from scraping
-      db.Article.create(result)
-        .then((dbArticle) => {
+      // Create a new News using the `result` object built from scraping
+      db.News.create(result)
+        .then(dbNews => {
           // View the added result in the console
-          console.log(dbArticle);
+          console.log(dbNews);
         })
-        .catch((err) =>{
+        .catch(err => {
           // If an error occurred, log it
           console.log(err);
         });
@@ -77,31 +94,31 @@ app.get("/scrape", (req, res) => {
   });
 });
 
-// Route for getting all Articles from the db
-app.get("/articles", (req, res) => {
-  // TODO: Finish the route so it grabs all of the articles
-  find(Article)
+// Route for getting all news from the db
+app.get("/news", (req, res) => {
+  // TODO: Finish the route so it grabs all of the news
+  db.News.find({});
 });
 
-// Route for grabbing a specific Article by id, populate it with it's note
-app.get("/articles/:id", (req, res) => {
+// Route for grabbing a specific News by id, populate it with it's note
+app.get("/news/:id", (req, res) => {
   // TODO
   // ====
-  // Finish the route so it finds one article using the req.params.id,
+  // Finish the route so it finds one News using the req.params.id,
   // and run the populate method with "note",
-  // then responds with the article with the note included
+  // then responds with the News with the note included
 });
 
-// Route for saving/updating an Article's associated Note
-app.post("/articles/:id", (req, res) => {
+// Route for saving/updating an News's associated Note
+app.post("/news/:id", (req, res) => {
   // TODO
   // ====
   // save the new note that gets posted to the Notes collection
-  // then find an article from the req.params.id
+  // then find an News from the req.params.id
   // and update it's "note" property with the _id of the new note
 });
 
 // Start the server
-app.listen(PORT, () =>{
+app.listen(PORT, () => {
   console.log("App running on port " + PORT + "!");
 });
