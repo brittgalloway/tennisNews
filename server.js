@@ -40,14 +40,14 @@ mongoose.connect("mongodb://localhost/unit18Populater", { useNewUrlParser: true 
 // Routes
 
 // A GET route for scraping the echoJS website
-app.get("/scrape", function(req, res) {
+app.get("/scrape", (req, res) => {
   // First, we grab the body of the html with axios
   axios.get("https://www.atptour.com/en/news").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
-    $("h3.listing-title").each(function(i, element) {
+    $("h3.listing-title").each((i, element) => {
       // Save an empty result object
       var result = {};
 
@@ -61,11 +61,11 @@ app.get("/scrape", function(req, res) {
 
       // Create a new Article using the `result` object built from scraping
       db.Article.create(result)
-        .then(function(dbArticle) {
+        .then((dbArticle) => {
           // View the added result in the console
           console.log(dbArticle);
         })
-        .catch(function(err) {
+        .catch((err) =>{
           // If an error occurred, log it
           console.log(err);
         });
@@ -77,12 +77,13 @@ app.get("/scrape", function(req, res) {
 });
 
 // Route for getting all Articles from the db
-app.get("/articles", function(req, res) {
+app.get("/articles", (req, res) => {
   // TODO: Finish the route so it grabs all of the articles
+  find(Article)
 });
 
 // Route for grabbing a specific Article by id, populate it with it's note
-app.get("/articles/:id", function(req, res) {
+app.get("/articles/:id", (req, res) => {
   // TODO
   // ====
   // Finish the route so it finds one article using the req.params.id,
@@ -91,7 +92,7 @@ app.get("/articles/:id", function(req, res) {
 });
 
 // Route for saving/updating an Article's associated Note
-app.post("/articles/:id", function(req, res) {
+app.post("/articles/:id", (req, res) => {
   // TODO
   // ====
   // save the new note that gets posted to the Notes collection
@@ -100,6 +101,6 @@ app.post("/articles/:id", function(req, res) {
 });
 
 // Start the server
-app.listen(PORT, function() {
+app.listen(PORT, () =>{
   console.log("App running on port " + PORT + "!");
 });
