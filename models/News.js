@@ -3,7 +3,7 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 // Schema constructor
-var ArticleSchema = new Schema({
+var NewsSchema = new Schema({
   headline: {
     type: String,
     required: true,
@@ -22,13 +22,13 @@ var ArticleSchema = new Schema({
     required: true,
   },
 
-  // Comments will populate the Article
+  // Comments will populate the News
   comment: {
     type: Schema.Types.ObjectId,
     ref: "Comments",
   },
 });
 
-var Article = mongoose.model("Article", ArticleSchema);
+var News = mongoose.model("News", NewsSchema);
 
-module.exports = Article;
+module.exports = News;
