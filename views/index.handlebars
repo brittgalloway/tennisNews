@@ -34,7 +34,7 @@
             </li>
             <li>
                 {{!-- on click remove class .is-hidden on #getComments --}}
-              <p>Comments</p>
+              <p id="showComments">Comments</p>
             </li>
             <li>
               {{#each comment}}
@@ -54,7 +54,7 @@
               </article>
               {{/each}}
               {{!-- on click remove class .is-hidden on #postComments --}}
-              <a class="button is-info">Add Comment</a>
+              <a id="addComment" >Add Comment</a>
               {{!-- TO POST A COMMENT --}}
               <article id="postComment" class="media is-hidden">
                 <div class="media-content">
@@ -82,6 +82,6 @@
         </div>
         {{/each}}
         <a href="/scrape">Scraped Info</a>
-        <a href="/articles">All articles Info</a>
+        <a href="/comments">All Comments</a>
       </div>
     </div>

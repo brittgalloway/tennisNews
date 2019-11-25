@@ -47,29 +47,39 @@
               </p>
             </li>
             <li>
-              <a href="{{this.url}}">Read it Here</a>
+              <a href={{this.url}}>Read it Here</a>
             </li>
             <li>
-              <p>Comments</p>
+                <!-- {{!-- on click remove class .is-hidden on #getComments --}} -->
+              <a>
+
+                  <p id="showComments">Comments</p>
+              </a>
             </li>
             <li>
-              {{#each comment}}
-              <article class="media">
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <small>{{this.createdAt}}</small>
-                      <br />
-                      {{this.comment}}
-                    </p>
-                  </div>
-                </div>
-                <div class="media-right">
-                  <button class="delete"></button>
-                </div>
-              </article>
-              {{/each}}
-              <article class="media is-hidden">
+              <!-- {{#each comment}} -->
+
+
+                  <article id="getComments" class="media is-hidden">
+                    <div class="media-content">
+                      <div class="content">
+                        <p>
+                          <small>{{this.createdAt}}</small>
+                          <br />
+                          {{this.comment}}
+                        </p>
+                      </div>
+                    </div>
+                    <div class="media-right">
+                      <button class="delete"></button>
+                    </div>
+                  </article>
+
+              <!-- {{/each}} -->
+              <!-- {{!-- on click remove class .is-hidden on #postComments --}} -->
+              <a id="addComment" >Add Comment</a>
+              <!-- {{!-- TO POST A COMMENT --}} -->
+              <article id="postComment" class="media is-hidden">
                 <div class="media-content">
                   <div class="field">
                     <p class="control">
@@ -83,21 +93,23 @@
                   <div class="level">
                     <div class="level-left">
                       <div class="level-item">
+                          <!-- {{!--  --}} -->
                         <a class="button is-info">Submit</a>
                       </div>
                     </div>
                   </div>
                 </div>
               </article>
-              <a class="button is-info">Add Comment</a>
             </li>
           </ul>
         </div>
-        {{/each}}
+        <!-- {{/each}} -->
+        <a href="/scrape">Scraped Info</a>
+        <a href="/articles">All articles Info</a>
       </div>
     </div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <script src="app.js"></script>
+    <script src="..\public\app.js"></script>
   </body>
 </html>

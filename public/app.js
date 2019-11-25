@@ -8,3 +8,15 @@ $.getJSON("/articles", function(data) {
       $("#articles").append("<p data-id='" + data[i]._id + "'>" + data[i].title + "<br />" + data[i].link + "</p>");
     }
   });
+
+$("#showComments").on("click", () =>{
+    $("#getComments").removeClass("is-hidden");
+});
+$(".delete").on("click", () =>{
+    $("#getComments").addClass("is-hidden");
+
+})
+$("#addComment").on("click", () =>{
+    
+    $("#postComment").removeClass("is-hidden");
+});
