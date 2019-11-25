@@ -4,12 +4,16 @@ var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 
 var CommentSchema = new Schema({
+  time: {
+    type: Date,
+    required: true,
+  },
 
-  title: String,
-
-  body: String
+  body: {
+    type: String,
+    required: true,
+  },
 });
-
 
 var Comment = mongoose.model("Comment", CommentSchema);
 
