@@ -25,9 +25,11 @@
               </div>
             </li>
             <li>
-              <p>
-                {{this.summary}}
-              </p>
+             <img width="348" src="https://www.atptour.com{{this.thumbNail}}">
+              
+            </li>
+            <li>
+             <p>{{category}}</p>
             </li>
             <li>
               <a href={{this.url}}>Read it Here</a>
@@ -42,9 +44,9 @@
                 <div class="media-content">
                   <div class="content">
                     <p>
-                      <small>{{this.createdAt}}</small>
+                      <small>{{this.time}}</small>
                       <br />
-                      {{this.comment}}
+                      {{this.body}}
                     </p>
                   </div>
                 </div>
