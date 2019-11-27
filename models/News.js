@@ -1,9 +1,9 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 // Schema constructor
-var NewsSchema = new Schema({
+const NewsSchema = new Schema({
   headline: {
     type: String,
     required: true,
@@ -25,10 +25,10 @@ var NewsSchema = new Schema({
   // Comments will populate the News
   comment: {
     type: Schema.Types.ObjectId,
-    ref: "Comments",
+    ref: "Comment",
   },
 });
 
-var News = mongoose.model("News", NewsSchema);
+const News = mongoose.model("News", NewsSchema);
 
 module.exports = News;

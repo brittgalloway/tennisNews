@@ -1,11 +1,12 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
 // Schema constructor
-var Schema = mongoose.Schema;
+const Schema = mongoose.Schema;
 
-var CommentSchema = new Schema({
+const CommentSchema = new Schema({
   time: {
     type: Date,
+    default: Date.now,
     required: true,
   },
 
@@ -15,6 +16,6 @@ var CommentSchema = new Schema({
   },
 });
 
-var Comment = mongoose.model("Comment", CommentSchema);
+const Comment = mongoose.model("Comment", CommentSchema);
 
 module.exports = Comment;

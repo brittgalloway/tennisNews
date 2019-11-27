@@ -11,16 +11,16 @@
             </span>
           </p>
         </div>
-        {{#each news}}
+        {{#each News}}
         <div class="panel-block is-active">
           <ul>
             <li>
               <div class="level-left">
-                <span class="panel-icon">
-                  <i class="fas fa-book" aria-hidden="true"></i>
-                </span>
-                <h2 class="subtitle">
+              
+                <h2  class="subtitle">
+                  <a href="https://www.atptour.com{{this.url}}">
                   {{this.headline}}
+                  </a>
                 </h2>
               </div>
             </li>
@@ -32,21 +32,18 @@
              <p>{{category}}</p>
             </li>
             <li>
-              <a href={{this.url}}>Read it Here</a>
-            </li>
-            <li>
                 {{!-- on click remove class .is-hidden on #getComments --}}
-              <p id="showComments">Comments</p>
+              <p data-id="{{this._id}}" id="showComments">Comments</p>
             </li>
             <li>
-              {{#each comment}}
+              {{#each Comment}}
               <article id="getComments" class="media is-hidden">
                 <div class="media-content">
                   <div class="content">
                     <p>
-                      <small>{{this.time}}</small>
+                      <small>{{this.time}}present</small>
                       <br />
-                      {{this.body}}
+                      {{this.body}} also here
                     </p>
                   </div>
                 </div>
@@ -83,7 +80,8 @@
           </ul>
         </div>
         {{/each}}
-        <a href="/scrape">Scraped Info</a>
+        <a href="/scrape">Scrape Info</a>
+        <a href="/news">Scraped Info</a>
         <a href="/comments">All Comments</a>
       </div>
     </div>

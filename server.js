@@ -32,7 +32,7 @@ app.set("view engine", "handlebars");
 
 require("./routes/htmlRoutes")(app);
 // Connect to the Mongo DB
-mongoose.connect("mongodb://localhost/unit18Populater", {
+mongoose.connect("mongodb://localhost/tennisNews", {
   useNewUrlParser: true,
 });
 
@@ -90,32 +90,56 @@ app.get("/scrape", (req, res) => {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete");
+    res.send("Scrape Complete <a href='/'>Home</a>");
   });
 });
 
 // Route for getting all news from the db
 app.get("/news", (req, res) => {
   // TODO: Finish the route so it grabs all of the news
-  db.News.find({});
+  db.News.find()
+    .then(dbNews2 => {
+      res.json(dbNews2);
+    })
+    .catch(err => {
+      console.log(err);
+    });
 });
 
 // Route for grabbing a specific News by id, populate it with it's note
 app.get("/news/:id", (req, res) => {
-  // TODO
-  // ====
-  // Finish the route so it finds one News using the req.params.id,
-  // and run the populate method with "note",
-  // then responds with the News with the note included
+  db.News.findOne({ _id: req.params.id })
+    // ..and populate all of the notes associated with it
+    .populate("Comment")
+    .then(function(dbNews3) {
+      // If we were able to successfully find an News with the given id, send it back to the client
+      res.json(dbNews3);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
-// Route for saving/updating an News's associated Note
-app.post("/news/:id", (req, res) => {
-  // TODO
-  // ====
-  // save the new note that gets posted to the Notes collection
-  // then find an News from the req.params.id
-  // and update it's "note" property with the _id of the new note
+// Route for saving/updating an News's associated Comment
+app.post("/news/:id", function(req, res) {
+  // Create a new comment and pass the req.body to the entry
+  db.Comment.create(req.body)
+    .then(function(dbComment) {
+      return db.News.findOneAndUpdate(
+        { _id: req.params.id },
+        { comment: dbComment._id },
+        { new: true },
+      );
+    })
+    .then(function(dbNews4) {
+      // If we were able to successfully update an News, send it back to the client
+      res.json(dbNews4);
+    })
+    .catch(function(err) {
+      // If an error occurred, send it to the client
+      res.json(err);
+    });
 });
 
 // Start the server
