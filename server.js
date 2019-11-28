@@ -36,10 +36,6 @@ mongoose.connect("mongodb://localhost/tennisNews", {
   useNewUrlParser: true,
 });
 
-// // If deployed, use the deployed database. Otherwise use the local mongoHeadlines database
-// var MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/mongoHeadlines";
-
-// mongoose.connect(MONGODB_URI);
 // Routes
 
 // A GET route for scraping the echoJS website
@@ -108,7 +104,7 @@ app.get("/news", (req, res) => {
 
 // Route for grabbing a specific News by id, populate it with it's note
 app.get("/news/:id", (req, res) => {
-  db.News.findOne({ _id: req.params.id })
+  db.News.find({ _id: req.params.id })
     // ..and populate all of the notes associated with it
     .populate("Comment")
     .then(function(dbNews3) {

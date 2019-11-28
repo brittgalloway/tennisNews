@@ -23,10 +23,12 @@ const NewsSchema = new Schema({
   },
 
   // Comments will populate the News
-  comment: {
-    type: Schema.Types.ObjectId,
-    ref: "Comment",
-  },
+  comment: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: "Comment",
+    },
+  ],
 });
 
 const News = mongoose.model("News", NewsSchema);

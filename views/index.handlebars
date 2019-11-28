@@ -33,10 +33,10 @@
             </li>
             <li>
                 {{!-- on click remove class .is-hidden on #getComments --}}
-              <p data-id="{{this._id}}" id="showComments">Comments</p>
+              <p id="showComments" data-id="{{this._id}}" >Comments</p>
             </li>
             <li>
-              {{#each Comment}}
+              {{#each Comments}}
               <article id="getComments" class="media is-hidden">
                 <div class="media-content">
                   <div class="content">
@@ -70,7 +70,7 @@
                     <div class="level-left">
                       <div class="level-item">
                           {{!--  --}}
-                        <a class="button is-info">Submit</a>
+                        <a class="button is-info" data-id="{{this._id}}">Submit</a>
                       </div>
                     </div>
                   </div>
