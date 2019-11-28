@@ -1,13 +1,13 @@
 //show and hide comment section
 $("#showComments").on("click", function() {
   const thisId = $(this).attr("data-id");
-  $("#getComments").removeClass("is-hidden");
   $.ajax({
     method: "GET",
     url: "/news/" + thisId,
   }).then(function(data) {
     console.log(data);
   });
+  $("#getComments").removeClass("is-hidden");
 });
 $(".delete").on("click", () => {
   $("#getComments").addClass("is-hidden");

@@ -103,10 +103,10 @@ app.get("/news", (req, res) => {
 });
 
 // Route for grabbing a specific News by id, populate it with it's note
-app.get("/news/:id", (req, res) => {
+app.get("/news/:id", function(req, res){
   db.News.find({ _id: req.params.id })
     // ..and populate all of the notes associated with it
-    .populate("Comment")
+    .populate("comment")
     .then(function(dbNews3) {
       // If we were able to successfully find an News with the given id, send it back to the client
       res.json(dbNews3);
@@ -116,15 +116,28 @@ app.get("/news/:id", (req, res) => {
       res.json(err);
     });
 });
+app.get("/populatedNews", function(req, res) {
+  // Find all users
+  db.News.find({})
+    // Specify that we want to populate the retrieved users with any associated notes
+    .populate("comment")
+    .then(function(dbNews) {
+      // If able to successfully find and associate all Newss and Notes, send them back to the client
+      res.json(dbNews);
+    })
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
+    });
+});
 
 // Route for saving/updating an News's associated Comment
 app.post("/news/:id", function(req, res) {
   // Create a new comment and pass the req.body to the entry
   db.Comment.create(req.body)
     .then(function(dbComment) {
-      return db.News.findOneAndUpdate(
-        { _id: req.params.id },
-        { comment: dbComment._id },
+      return db.News.findOneAndUpdate({},
+        { $push: { comment: dbComment._id } },
         { new: true },
       );
     })
