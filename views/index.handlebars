@@ -36,14 +36,15 @@
               <p id="showComments" data-id="{{this._id}}" >Comments</p>
             </li>
             <li>
-              {{#each Comments}}
+              {{#each comment}}
               <article id="getComments" class="media is-hidden">
                 <div class="media-content">
                   <div class="content">
                     <p>
-                      <small>{{this.time}}present</small>
+                      <small>{{this.time}}</small>
                       <br />
-                      {{this.body}} also here
+                      {{this.body}}
+                      
                     </p>
                   </div>
                 </div>
@@ -82,6 +83,6 @@
         {{/each}}
         <a href="/scrape">Scrape Info</a>
         <a href="/news">Scraped Info</a>
-        <a href="/comments">All Comments</a>
+        <a href="/populatedNews">All Comments and News</a>
       </div>
     </div>

@@ -1,23 +1,23 @@
 //show and hide comment section
-$("#showComments").on("click", function() {
+$(document).on("click", "#showComments", function() {
   const thisId = $(this).attr("data-id");
+  $("#getComments").removeClass("is-hidden");
   $.ajax({
     method: "GET",
     url: "/news/" + thisId,
   }).then(function(data) {
     console.log(data);
   });
-  $("#getComments").removeClass("is-hidden");
-});
-$(".delete").on("click", () => {
-  $("#getComments").addClass("is-hidden");
-});
-$("#addComment").on("click", () => {
-  $("#postComment").removeClass("is-hidden");
 });
 
+$(document).on("click", ".delete", function() {
+  $("#getComments").addClass("is-hidden");
+});
+$(document).on("click", "#addComment", function() {
+  $("#postComment").removeClass("is-hidden");
+});
 //post comment
-$("a.button").on("click", function() {
+$(document).on("click", "a.button", function() {
   const thisId = $(this).attr("data-id");
   // Run a POST request to change the note, using what's entered in the inputs
   $.ajax({
@@ -30,6 +30,7 @@ $("a.button").on("click", function() {
         .trim(),
     },
   }).then(function(data) {
+    $(".textarea").empty();
     console.log(data);
   });
 });
