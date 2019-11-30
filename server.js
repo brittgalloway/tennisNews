@@ -34,6 +34,7 @@ require("./routes/htmlRoutes")(app);
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/tennisNews", {
   useNewUrlParser: true,
+  useUnifiedTopology: true
 });
 
 // Routes
@@ -91,14 +92,28 @@ app.get("/scrape", (req, res) => {
 });
 
 // Route for getting all news from the db
-app.get("/news", (req, res) => {
-  // TODO: Finish the route so it grabs all of the news
-  db.News.find()
-    .then(dbNews2 => {
-      res.json(dbNews2);
+// app.get("/news", (req, res) => {
+//   // TODO: Finish the route so it grabs all of the news
+//   db.News.find()
+//     .then(dbNews2 => {
+//       res.json(dbNews2);
+//     })
+//     .catch(err => {
+//       console.log(err);
+//     });
+// });
+app.get("/populatedNews", function(req, res) {
+  // Find all users
+  db.News.find({})
+    // Specify that we want to populate the retrieved users with any associated notes
+    .populate("comment")
+    .then(function(dbNews) {
+      // If able to successfully find and associate all Newss and Notes, send them back to the client
+      res.json(dbNews);
     })
-    .catch(err => {
-      console.log(err);
+    .catch(function(err) {
+      // If an error occurs, send it back to the client
+      res.json(err);
     });
 });
 
@@ -113,20 +128,6 @@ app.get("/news/:id", function(req, res){
     })
     .catch(function(err) {
       // If an error occurred, send it to the client
-      res.json(err);
-    });
-});
-app.get("/populatedNews", function(req, res) {
-  // Find all users
-  db.News.find({})
-    // Specify that we want to populate the retrieved users with any associated notes
-    .populate("comment")
-    .then(function(dbNews) {
-      // If able to successfully find and associate all Newss and Notes, send them back to the client
-      res.json(dbNews);
-    })
-    .catch(function(err) {
-      // If an error occurs, send it back to the client
       res.json(err);
     });
 });
