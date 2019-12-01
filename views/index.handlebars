@@ -31,32 +31,35 @@
             <li>
              <p>{{category}}</p>
             </li>
+            <hr>
             <li>
                 {{!-- on click remove class .is-hidden on #getComments --}}
-              <p id="showComments" data-id="{{this._id}}" >Comments</p>
+              <p class="showComments" data-id="{{this._id}}" >Comments</p>
             </li>
             <li>
+              <span class="is-hidden">
               {{#each comment}}
-              <article id="getComments" class="media is-hidden">
+              <article class="getComments{{this._id}}" class="media">
                 <div class="media-content">
                   <div class="content">
                     <p>
-                      <small>{{this.time}}</small>
+                      <small>{{this}}</small>
                       <br />
-                      {{this.body}}
-                      
+                      {{this}}   
                     </p>
                   </div>
                 </div>
-                <div class="media-right">
-                  <button class="delete"></button>
-                </div>
+                <hr>
               </article>
               {{/each}}
+                <div class="is-pulled-right">
+                  <button class="delete"></button>
+                </div>
+              </span>
               {{!-- on click remove class .is-hidden on #postComments --}}
               <a id="addComment" >Add Comment</a>
               {{!-- TO POST A COMMENT --}}
-              <article id="postComment" class="media is-hidden">
+              <section id="postComment" class="media is-hidden">
                 <div class="media-content">
                   <div class="field">
                     <p class="control">
@@ -70,13 +73,12 @@
                   <div class="level">
                     <div class="level-left">
                       <div class="level-item">
-                          {{!--  --}}
                         <a class="button is-info" data-id="{{this._id}}">Submit</a>
                       </div>
                     </div>
                   </div>
                 </div>
-              </article>
+              </section>
             </li>
           </ul>
         </div>

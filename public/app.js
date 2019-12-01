@@ -1,7 +1,7 @@
 //show and hide comment section
-$(document).on("click", "#showComments", function() {
+$(document).on("click", ".showComments", function() {
   const thisId = $(this).attr("data-id");
-  $("#getComments").removeClass("is-hidden");
+  $("span").removeClass("is-hidden");
   $.ajax({
     method: "GET",
     url: "/news/" + thisId,
@@ -11,7 +11,7 @@ $(document).on("click", "#showComments", function() {
 });
 
 $(document).on("click", ".delete", function() {
-  $("#getComments").addClass("is-hidden");
+  $("span").addClass("is-hidden");
 });
 $(document).on("click", "#addComment", function() {
   $("#postComment").removeClass("is-hidden");
@@ -30,7 +30,7 @@ $(document).on("click", "a.button", function() {
         .trim(),
     },
   }).then(function(data) {
-    $(".textarea").empty();
+    $(".textarea").text("");
     console.log(data);
   });
 });
