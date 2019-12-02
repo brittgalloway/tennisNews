@@ -34,7 +34,8 @@ require("./routes/htmlRoutes")(app);
 // Connect to the Mongo DB
 mongoose.connect("mongodb://localhost/tennisNews", {
   useNewUrlParser: true,
-  useUnifiedTopology: true
+  useUnifiedTopology: true,
+  useFindAndModify: false,
 });
 
 // Routes
@@ -45,7 +46,7 @@ app.get("/scrape", (req, res) => {
   axios.get("https://www.atptour.com/en/news").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
     var $ = cheerio.load(response.data);
-    const listing = $(".listing-item");
+  
     // console.log(listing.html());
 
     $(".listing-item").each(function(i, element) {
@@ -118,36 +119,66 @@ app.get("/populatedNews", function(req, res) {
 });
 
 // Route for grabbing a specific News by id, populate it with it's note
-app.get("/news/:id", function(req, res){
+app.get("/news/:id", function(req, res) {
   db.News.find({ _id: req.params.id })
-    // ..and populate all of the notes associated with it
     .populate("comment")
     .then(function(dbNews3) {
-      // If we were able to successfully find an News with the given id, send it back to the client
       res.json(dbNews3);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
       res.json(err);
     });
 });
+// app.get("/news/:id", function(req, res) {
+//   db.News.find({})
+//     // ..and populate all of the notes associated with it
+//     .populate("comment")
+//     .then(function(dbNews3) {
+//       // If we were able to successfully find an News with the given id, send it back to the client
+//       res.json(dbNews3);
+//     })
+//     .catch(function(err) {
+//       // If an error occurred, send it to the client
+//       res.json(err);
+//     });
+// });
 
 // Route for saving/updating an News's associated Comment
+// app.post("/news/:id", function(req, res) {
+//   // Create a new comment and pass the req.body to the entry
+//   db.Comment.create(req.body)
+//     .then(function(dbComment) {
+//       return db.News.findOneAndUpdate(
+//         { _id: req.params.id },
+//         { $push: { comment: dbComment._id } },
+//         { new: true },
+//       );
+//     })
+//     .then(function(dbNews3) {
+//       // If we were able to successfully update an News, send it back to the client
+//       res.json(dbNews3);
+//     })
+//     .catch(function(err) {
+//       // If an error occurred, send it to the client
+//       res.json(err);
+//     });
+// });
 app.post("/news/:id", function(req, res) {
   // Create a new comment and pass the req.body to the entry
   db.Comment.create(req.body)
     .then(function(dbComment) {
-      return db.News.findOneAndUpdate({},
+      return db.News.findOneAndUpdate(
+        {},
         { $push: { comment: dbComment._id } },
         { new: true },
       );
     })
-    .then(function(dbNews4) {
-      // If we were able to successfully update an News, send it back to the client
-      res.json(dbNews4);
+    .then(function(dbNews3) {
+
+      res.json(dbNews3);
     })
     .catch(function(err) {
-      // If an error occurred, send it to the client
+
       res.json(err);
     });
 });

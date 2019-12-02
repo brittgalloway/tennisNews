@@ -37,33 +37,33 @@
               <p class="showComments" data-id="{{this._id}}" >Comments</p>
             </li>
             <li>
-              <span class="is-hidden">
+              <span >
               {{#each comment}}
-              <article class="getComments{{this._id}}" class="media">
+              <article class="getComments" class="media">
                 <div class="media-content">
                   <div class="content">
                     <p>
                       <small>{{this}}</small>
                       <br />
-                      {{this}}   
+                      {{this.body}}   
                     </p>
                   </div>
                 </div>
                 <hr>
               </article>
               {{/each}}
-                <div class="is-pulled-right">
+                {{!-- <div class="is-pulled-right">
                   <button class="delete"></button>
-                </div>
+                </div> --}}
               </span>
               {{!-- on click remove class .is-hidden on #postComments --}}
-              <a id="addComment" >Add Comment</a>
+              <a class="addComment" >Add Comment</a>
               {{!-- TO POST A COMMENT --}}
-              <section id="postComment" class="media is-hidden">
+              <section class="postComment" class="media">
                 <div class="media-content">
                   <div class="field">
                     <p class="control">
-                      <textarea
+                      <textarea data-id="{{this._id}}"
                         class="textarea"
                         placeholder="Add a comment..."
                       ></textarea>
