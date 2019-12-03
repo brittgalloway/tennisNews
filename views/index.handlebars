@@ -1,90 +1,87 @@
 <div class="container">
-      <div class="panel">
-        <p class="panel-heading has-text-centered">
-          Hottest Tennis News
-        </p>
-        <div class="panel-block">
-          <p class="control has-icons-left">
-            <input class="input" type="text" placeholder="Search" />
-            <span class="icon is-left">
-              <i class="fas fa-search" aria-hidden="true"></i>
-            </span>
-          </p>
-        </div>
-        {{#each News}}
-        <div class="panel-block is-active">
-          <ul>
-            <li>
-              <div class="level-left">
-              
-                <h2  class="subtitle">
-                  <a href="https://www.atptour.com{{this.url}}">
-                  {{this.headline}}
-                  </a>
-                </h2>
-              </div>
-            </li>
-            <li>
-             <img width="348" src="https://www.atptour.com{{this.thumbNail}}">
-              
-            </li>
-            <li>
-             <p>{{category}}</p>
-            </li>
-            <hr>
-            <li>
-                {{!-- on click remove class .is-hidden on #getComments --}}
-              <p class="showComments" data-id="{{this._id}}" >Comments</p>
-            </li>
-            <li>
-              <span >
-              {{#each comment}}
-              <article class="getComments" class="media">
-                <div class="media-content">
-                  <div class="content">
-                    <p>
-                      <small>{{this}}</small>
-                      <br />
-                      {{this.body}}   
-                    </p>
-                  </div>
+  <div class="panel">
+    <p class="panel-heading has-text-centered">
+      Hottest Tennis News
+    </p>
+    <div class="panel-block">
+      <p class="control has-icons-left">
+        <input class="input" type="text" placeholder="Search" />
+        <span class="icon is-left">
+          <i class="fas fa-search" aria-hidden="true"></i>
+        </span>
+      </p>
+    </div>
+    {{#each News}}
+    <div class="panel-block is-active">
+      <ul>
+        <li>
+          <div class="level-left">
+
+            <h2 class="subtitle">
+              <a href="https://www.atptour.com{{this.url}}">
+                {{this.headline}}
+              </a>
+            </h2>
+          </div>
+        </li>
+        <li>
+          <img width="348" src="https://www.atptour.com{{this.thumbNail}}">
+
+        </li>
+        <li>
+          <p>{{category}}</p>
+        </li>
+        <hr>
+        <li>
+          {{!-- on click remove class .is-hidden on #getComments --}}
+          <p class="showComments" data-id="{{this._id}}">Comments</p>
+        </li>
+        <li>
+          <span>
+            {{#each comment}}
+            <article class="getComments" class="media">
+              <div class="media-content">
+                <div class="content">
+                  <p>
+                    <small>{{this.time}}</small>
+                    <br />
+                    {{this.body}}
+                  </p>
                 </div>
-                <hr>
-              </article>
-              {{/each}}
-                {{!-- <div class="is-pulled-right">
+              </div>
+              <hr>
+            </article>
+            {{/each}}
+            {{!-- <div class="is-pulled-right">
                   <button class="delete"></button>
                 </div> --}}
-              </span>
-              {{!-- on click remove class .is-hidden on #postComments --}}
-              <a class="addComment" >Add Comment</a>
-              {{!-- TO POST A COMMENT --}}
-              <section class="postComment" class="media">
-                <div class="media-content">
-                  <div class="field">
-                    <p class="control">
-                      <textarea data-id="{{this._id}}"
-                        class="textarea"
-                        placeholder="Add a comment..."
-                      ></textarea>
-                    </p>
-                  </div>
+          </span>
+          {{!-- on click remove class .is-hidden on #postComments --}}
+          <a class="addComment">Add Comment</a>
+          {{!-- TO POST A COMMENT --}}
+          <section class="postComment" class="media">
+            <div class="media-content">
+              <div class="field">
+                <p class="control">
+                  <textarea data-id="{{this._id}}" class="textarea" placeholder="Add a comment..."></textarea>
+                </p>
+              </div>
 
-                  <div class="level">
-                    <div class="level-left">
-                      <div class="level-item">
-                        <a class="button is-info" data-id="{{this._id}}">Submit</a>
-                      </div>
-                    </div>
+              <div class="level">
+                <div class="level-left">
+                  <div class="level-item">
+                    <a class="button is-info" data-id="{{this._id}}">Submit</a>
                   </div>
                 </div>
-              </section>
-            </li>
-          </ul>
-        </div>
-        {{/each}}
-        <a href="/scrape">Scrape Info</a>
-        <a href="/news">Scraped Info</a>
-        <a href="/populatedNews">All Comments and News</a>
-      </div>
+              </div>
+            </div>
+          </section>
+        </li>
+      </ul>
     </div>
+    {{/each}}
+    <a href="/scrape">Scrape Info</a>
+    <a href="/news">Scraped Info</a>
+    <a href="/populatedNews">All Comments and News</a>
+  </div>
+</div>

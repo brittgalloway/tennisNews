@@ -5,8 +5,9 @@ module.exports = function(app) {
 
   app.get("/", function(req, res) {
     db.News.find()
+      .populate("comment")
       .then(News => {
-        res.render("index", {News});
+        res.render("index", { News });
       })
       .catch(err => {
         console.log(err);
