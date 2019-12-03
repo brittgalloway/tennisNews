@@ -1,2 +1,2 @@
-# tennisNews
-App that pulls in relevant tennis articles and allows users to leave comments
+# Tennis News
+Get all the hottest ATP Tour news here with TennisNews.
