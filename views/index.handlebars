@@ -34,12 +34,12 @@
         <hr>
         <li>
           {{!-- on click remove class .is-hidden on #getComments --}}
-          <p class="showComments" data-id="{{this._id}}">Comments</p>
+          <p id="showComments" data-id="{{this._id}}">Comments</p>
         </li>
         <li>
           <span>
             {{#each comment}}
-            <article class="getComments" class="media">
+            <article class="getComments" class="media is-hidden">
               <div class="media-content">
                 <div class="content">
                   <p>
@@ -52,14 +52,14 @@
               <hr>
             </article>
             {{/each}}
-            {{!-- <div class="is-pulled-right">
-                  <button class="delete"></button>
-                </div> --}}
+            <div class="is-pulled-right">
+              <button class="delete"></button>
+            </div>
           </span>
           {{!-- on click remove class .is-hidden on #postComments --}}
           <a class="addComment">Add Comment</a>
           {{!-- TO POST A COMMENT --}}
-          <section class="postComment" class="media">
+          <section class="postComment is-hidden" class="media">
             <div class="media-content">
               <div class="field">
                 <p class="control">

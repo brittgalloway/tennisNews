@@ -7,13 +7,17 @@ const CommentSchema = new Schema({
   time: {
     type: Date,
     default: Date.now,
-    required: true,
+    required: true
   },
 
   body: {
     type: String,
-    required: true,
+    required: true
   },
+  news: {
+    type: Schema.Types.ObjectId,
+    ref: "News"
+  }
 });
 
 const Comment = mongoose.model("Comment", CommentSchema);
