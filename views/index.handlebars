@@ -1,6 +1,6 @@
-<div class="container has-background-white">
+<div class="container">
   <div class="panel">
-    <h1 class="panel-heading title is-size-2 has-background-grey-lighter has-text-info has-text-centered">
+    <h1 class="panel-heading title is-size-2 has-text-centered">
       Hottest Tennis News
     </h1>
     {{!-- <div class="panel-block">
@@ -17,7 +17,7 @@
         <li>
           <div class="level-left">
 
-            <h2 class="subtitle">
+            <h2 class="subtitle is-size-4">
               <a href="https://www.atptour.com{{this.url}}">
                 {{this.headline}}
               </a>
@@ -37,7 +37,7 @@
         <div class="column is-full">
           <span data-id="{{this._id}}" class="box">
 
-            <h2 class="subtitle">Comments</h2>
+            <h2 class="subtitle is-size-4">Comments</h2>
 
             {{#each comment}}
             <article class="media ">
@@ -46,7 +46,7 @@
                   <p>
                     {{this.body}}
                     <br />
-                    <small>Posted at: {{this.time}}</small>
+                    <small class= "is-size-7">Posted at: {{this.time}}</small>
                   </p>
                 </div>
               </div>
@@ -55,7 +55,6 @@
             {{/each}}
 
           </span>
-
         </div>
         <div class="column is-full">
 
@@ -67,15 +66,17 @@
                   <textarea data-id="{{this._id}}" class="textarea" placeholder="Add a comment..."></textarea>
                 </p>
               </div>
-              <a class="button is-info" data-id="{{this._id}}">Submit</a>
+              <a class="button " data-id="{{this._id}}">Submit</a>
             </div>
           </section>
         </div>
       </div>
     </div>
     {{/each}}
+    <span class="links ">
     <a href="/scrape">Scrape Info</a> |
     <a href="/news">Scraped Info</a> |
     <a href="/populatedNews">All Comments and News</a>
+    </span>
   </div>
 </div>
