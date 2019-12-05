@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const Schema = mongoose.Schema;
 
-// Schema constructor
 const NewsSchema = new Schema({
   headline: {
     type: String,

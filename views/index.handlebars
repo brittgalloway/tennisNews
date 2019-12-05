@@ -1,23 +1,23 @@
 <div class="container">
   <div class="panel">
-    <p class="panel-heading has-text-centered">
+    <h1 class="panel-heading title is-size-2 has-text-centered">
       Hottest Tennis News
-    </p>
-    <div class="panel-block">
+    </h1>
+    {{!-- <div class="panel-block">
       <p class="control has-icons-left">
         <input class="input" type="text" placeholder="Search" />
         <span class="icon is-left">
           <i class="fas fa-search" aria-hidden="true"></i>
         </span>
       </p>
-    </div>
+    </div> --}}
     {{#each News}}
     <div class="panel-block is-active">
       <ul>
         <li>
           <div class="level-left">
 
-            <h2 class="subtitle">
+            <h2 class="subtitle is-size-4">
               <a href="https://www.atptour.com{{this.url}}">
                 {{this.headline}}
               </a>
@@ -25,63 +25,58 @@
           </div>
         </li>
         <li>
-          <img width="348" src="https://www.atptour.com{{this.thumbNail}}">
+          <img width="500" src="https://www.atptour.com{{this.thumbNail}}">
 
         </li>
         <li>
           <p>{{category}}</p>
         </li>
-        <hr>
-        <li>
-          {{!-- on click remove class .is-hidden on #getComments --}}
-          <p id="showComments" data-id="{{this._id}}">Comments</p>
-        </li>
-        <li>
-          <span>
+
+      </ul>
+      <div class="columns  is-multiline is-mobile">
+        <div class="column is-full">
+          <span data-id="{{this._id}}" class="box">
+
+            <h2 class="subtitle is-size-4">Comments</h2>
+
             {{#each comment}}
-            <article class="getComments" class="media is-hidden">
+            <article class="media ">
               <div class="media-content">
                 <div class="content">
                   <p>
-                    <small>{{this.time}}</small>
-                    <br />
                     {{this.body}}
+                    <br />
+                    <small class= "is-size-7">Posted at: {{this.time}}</small>
                   </p>
                 </div>
               </div>
               <hr>
             </article>
             {{/each}}
-            <div class="is-pulled-right">
-              <button class="delete"></button>
-            </div>
+
           </span>
-          {{!-- on click remove class .is-hidden on #postComments --}}
-          <a class="addComment">Add Comment</a>
+        </div>
+        <div class="column is-full">
+
           {{!-- TO POST A COMMENT --}}
-          <section class="postComment is-hidden" class="media">
+          <section class="media postComment">
             <div class="media-content">
               <div class="field">
                 <p class="control">
                   <textarea data-id="{{this._id}}" class="textarea" placeholder="Add a comment..."></textarea>
                 </p>
               </div>
-
-              <div class="level">
-                <div class="level-left">
-                  <div class="level-item">
-                    <a class="button is-info" data-id="{{this._id}}">Submit</a>
-                  </div>
-                </div>
-              </div>
+              <a class="button " data-id="{{this._id}}">Submit</a>
             </div>
           </section>
-        </li>
-      </ul>
+        </div>
+      </div>
     </div>
     {{/each}}
-    <a href="/scrape">Scrape Info</a>
-    <a href="/news">Scraped Info</a>
+    <span class="links ">
+    <a href="/scrape">Scrape Info</a> |
+    <a href="/news">Scraped Info</a> |
     <a href="/populatedNews">All Comments and News</a>
+    </span>
   </div>
 </div>

@@ -1,3 +1,74 @@
-ul{
-    width: 100%
+@import url("https://fonts.googleapis.com/css?family=Poppins:200|Raleway:500&display=swap");
+body {
+  background: #66b9bf;
 }
+
+body .container {
+  padding-top: 5em;
+  padding-bottom: 5em;
+}
+
+body .panel {
+  background: #fffbf9;
+}
+
+.panel-heading {
+  font-family: "Poppins", sans-serif;
+  background: #eeaa7b;
+  color: #fffbf9;
+}
+
+.panel-block p {
+  font-family: "Raleway", sans-serif;
+}
+
+.panel-block ul {
+  width: 100%;
+}
+
+.panel-block ul a {
+  font-family: "Poppins", sans-serif;
+  color: #07889b;
+}
+
+.panel-block ul img {
+  border-radius: 20px;
+  margin-top: 20px;
+}
+
+.panel-block .box {
+  width: 500px;
+  height: 200px;
+  overflow: auto;
+  background: #fffbf9;
+}
+
+.panel-block .box .subtitle {
+  font-family: "Poppins", sans-serif;
+  color: #07889b;
+}
+
+.panel-block .textarea {
+  background: #fffbf9;
+}
+
+.panel-block a {
+  color: #fffbf9;
+}
+
+.panel-block a:hover {
+  color: #66b9bf;
+}
+
+.panel-block .button {
+  background-color: #eeaa7b;
+}
+
+.panel-block .button:hover {
+  color: #e37222;
+}
+
+.links {
+  padding: 20px;
+}
+/*# sourceMappingURL=style.css.map */
