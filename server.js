@@ -1,20 +1,20 @@
-var express = require("express");
-var logger = require("morgan");
-var mongoose = require("mongoose");
-var exphbs = require("express-handlebars");
+const express = require("express");
+const logger = require("morgan");
+const mongoose = require("mongoose");
+const exphbs = require("express-handlebars");
 
 
 
-var axios = require("axios");
-var cheerio = require("cheerio");
+const axios = require("axios");
+const cheerio = require("cheerio");
 
 
-var db = require("./models");
+const db = require("./models");
 
-var PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000;
 
 
-var app = express();
+const app = express();
 
 
 
@@ -27,7 +27,9 @@ app.engine("handlebars", exphbs({ defaultLayout: "main" }));
 app.set("view engine", "handlebars");
 
 require("./routes/htmlRoutes")(app);
-mongoose.connect("mongodb://localhost/tennisNews", {
+
+const MONGODB_URI = process.env.MONGODB_URI ||"mongodb://localhost/tennisNews";
+mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useFindAndModify: false
@@ -37,11 +39,11 @@ mongoose.connect("mongodb://localhost/tennisNews", {
 
 app.get("/scrape", (req, res) => {
   axios.get("https://www.atptour.com/en/news").then(function(response) {
-    var $ = cheerio.load(response.data);
+    const $ = cheerio.load(response.data);
 
 
     $(".listing-item").each(function(i, element) {
-      var result = {};
+      let result = {};
 
       result.headline = $(this)
         .find("div")
