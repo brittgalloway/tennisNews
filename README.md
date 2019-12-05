@@ -1,7 +1,7 @@
 # Tennis News
 Get all the hottest ATP Tour news here with Tennis News.
 
-## What it is
+## What It Is
 
 This tennis new app is a full stack web page that scrapes articles from the offical ATP Tour website. You can view the Headline, Thumbnail Image, Category, and Orignal Post Date.<br>
 Along side each article, you can post comments, and read previous comments. <br>
