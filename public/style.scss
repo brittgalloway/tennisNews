@@ -26,6 +26,7 @@ body {
   color: $offWhite;
 }
 .panel-block {
+  padding: 0.5em 7em;
   p {
     font-family: $contentFont;
   }
@@ -63,10 +64,12 @@ body {
   .button {
     background-color: $tan;
     &:hover {
-        color: $orange;
-      }
+      color: $orange;
+    }
   }
 }
 .links {
   padding: 20px;
 }
+
+@import "/bulma/sass/utilities/_all.sass";

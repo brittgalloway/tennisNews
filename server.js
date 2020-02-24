@@ -3,20 +3,14 @@ const logger = require("morgan");
 const mongoose = require("mongoose");
 const exphbs = require("express-handlebars");
 
-
-
 const axios = require("axios");
 const cheerio = require("cheerio");
 
-
 const db = require("./models");
 
-const PORT = process.env.PORT || 3000;
-
+const PORT = process.env.PORT || 8080;
 
 const app = express();
-
-
 
 app.use(logger("dev"));
 app.use(express.urlencoded({ extended: true }));
@@ -28,7 +22,7 @@ app.set("view engine", "handlebars");
 
 require("./routes/htmlRoutes")(app);
 
-const MONGODB_URI = process.env.MONGODB_URI ||"mongodb://localhost/tennisNews";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/tennisNews";
 mongoose.connect(MONGODB_URI, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -40,7 +34,6 @@ mongoose.connect(MONGODB_URI, {
 app.get("/scrape", (req, res) => {
   axios.get("https://www.atptour.com/en/news").then(function(response) {
     const $ = cheerio.load(response.data);
-
 
     $(".listing-item").each(function(i, element) {
       let result = {};
@@ -86,7 +79,6 @@ app.get("/populatedNews", function(req, res) {
 });
 
 app.get("/news/:id", function(req, res) {
-  
   db.News.find({ _id: req.params.id }) //find the specific News article's id
     .populate("comment")
     .then(function(dbNews3) {

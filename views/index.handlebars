@@ -3,80 +3,79 @@
     <h1 class="panel-heading title is-size-2 has-text-centered">
       Hottest Tennis News
     </h1>
-    {{!-- <div class="panel-block">
-      <p class="control has-icons-left">
-        <input class="input" type="text" placeholder="Search" />
-        <span class="icon is-left">
-          <i class="fas fa-search" aria-hidden="true"></i>
-        </span>
-      </p>
-    </div> --}}
+
     {{#each News}}
     <div class="panel-block is-active">
-      <ul>
-        <li>
-          <div class="level-left">
+      <div class="columns">
+        <div class="column is-half">
+          <ul>
+            <li>
+              <div class="level-left">
 
-            <h2 class="subtitle is-size-4">
-              <a href="https://www.atptour.com{{this.url}}">
-                {{this.headline}}
-              </a>
-            </h2>
-          </div>
-        </li>
-        <li>
-          <img width="500" src="https://www.atptour.com{{this.thumbNail}}">
-
-        </li>
-        <li>
-          <p>{{category}}</p>
-        </li>
-
-      </ul>
-      <div class="columns  is-multiline is-mobile">
-        <div class="column is-full">
-          <span data-id="{{this._id}}" class="box">
-
-            <h2 class="subtitle is-size-4">Comments</h2>
-
-            {{#each comment}}
-            <article class="media ">
-              <div class="media-content">
-                <div class="content">
-                  <p>
-                    {{this.body}}
-                    <br />
-                    <small class= "is-size-7">Posted at: {{this.time}}</small>
-                  </p>
-                </div>
+                <h2 class="subtitle is-size-4">
+                  <a href="https://www.atptour.com{{this.url}}">
+                    {{this.headline}}
+                  </a>
+                </h2>
               </div>
-              <hr>
-            </article>
-            {{/each}}
+            </li>
+            <li>
+              <img width="500" src="https://www.atptour.com{{this.thumbNail}}">
 
-          </span>
+            </li>
+            <li>
+              <p>{{category}}</p>
+            </li>
+
+          </ul>
         </div>
-        <div class="column is-full">
+        <div class="column is-half">
+          <div class="columns  is-multiline">
+            <div class="column is-full">
+              <span data-id="{{this._id}}" class="box">
 
-          {{!-- TO POST A COMMENT --}}
-          <section class="media postComment">
-            <div class="media-content">
-              <div class="field">
-                <p class="control">
-                  <textarea data-id="{{this._id}}" class="textarea" placeholder="Add a comment..."></textarea>
-                </p>
-              </div>
-              <a class="button " data-id="{{this._id}}">Submit</a>
+                <h2 class="subtitle is-size-4">Comments</h2>
+
+                {{#each comment}}
+                <article class="media ">
+                  <div class="media-content">
+                    <div class="content">
+                      <p>
+                        {{this.body}}
+                        <br />
+                        <small class="is-size-7">Posted at: {{this.time}}</small>
+                      </p>
+                    </div>
+                  </div>
+                  <hr>
+                </article>
+                {{/each}}
+
+              </span>
             </div>
-          </section>
+            <div class="column is-full">
+
+              {{!-- TO POST A COMMENT --}}
+              <section class="media postComment">
+                <div class="media-content">
+                  <div class="field">
+                    <p class="control">
+                      <textarea data-id="{{this._id}}" class="textarea" placeholder="Add a comment..."></textarea>
+                    </p>
+                  </div>
+                  <a class="button " data-id="{{this._id}}">Submit</a>
+                </div>
+              </section>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     {{/each}}
     <span class="links ">
-    <a href="/scrape">Scrape Info</a> |
-    <a href="/news">Scraped Info</a> |
-    <a href="/populatedNews">All Comments and News</a>
+      <a href="/scrape">Scrape Info</a> |
+      <a href="/news">Scraped Info</a> |
+      <a href="/populatedNews">All Comments and News</a>
     </span>
   </div>
 </div>
